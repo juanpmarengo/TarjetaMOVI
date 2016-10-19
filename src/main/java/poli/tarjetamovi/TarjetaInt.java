@@ -1,11 +1,14 @@
 package poli.tarjetamovi;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
- * Created by juancho on 30/06/16.
+ * Created by juancho on 19/10/16.
  */
 public interface TarjetaInt {
-    void pagar(Transporte transporte, String fechaHoraString);
+    Boleto pagar(Transporte transporte, LocalDateTime fecha, String tipo);
     void recargar(Double monto);
-    void saldo();
-    void viajesRealizados();
+    Double getSaldo();
+    List<Viaje> getViajes();
 }

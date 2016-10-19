@@ -1,9 +1,15 @@
 package poli.tarjetamovi;
 
+import java.time.LocalDateTime;
+
 /**
- * Created by juancho on 30/06/16.
+ * Created by juancho on 19/10/16.
  */
-public interface Transporte {
-    String getNombre();
-    Double getValorBoleto();
+public class Transporte {
+    private Lector lector;
+
+    public Boleto cobrar(Tarjeta tarjeta, LocalDateTime fecha, String tipo){
+        Boleto boleto = lector.apoyarTarjeta(tarjeta, fecha, tipo);
+        return boleto;
+    }
 }

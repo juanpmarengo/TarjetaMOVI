@@ -1,25 +1,44 @@
 package poli.tarjetamovi;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- * Created by juancho on 30/06/16.
+ * Created by juancho on 19/10/16.
  */
-public class Tarjeta extends TarjetaAbs{
+public class Tarjeta implements  TarjetaInt{
+    private Double saldo;
+    private List<Viaje> viajes;
 
-    public void pagar(Transporte transporte, String fechaHoraString){
-        LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraString);
-        Double costo;
-        if(viajes != null && viajes.size()>0 && transporte.getNombre() != viajes.get(viajes.size()-1).getTransporteNombre() && fechaHora.minusHours(1).isBefore(viajes.get(viajes.size()-1).getFechaHora())){
-            costo = 2.64;
+    public Tarjeta(){
+        viajes = new LinkedList<>();
+        saldo = 0.0;
+    }
+
+    @Override
+    public Boleto pagar(Transporte transporte, LocalDateTime fecha, String tipo) {
+        Boleto boleto = transporte.cobrar(this, fecha, tipo);
+
+        if (boleto != null){
+            Viaje viaje = new Viaje(boleto);
+            viajes.add(viaje);
         }
-        else {
-            costo = transporte.getValorBoleto();
-        }
-        if (costo > saldo) System.out.println("Saldo insuficiente.");
-        else {
-            saldo = saldo - costo;
-            viajes.add(new Viajes(transporte.getNombre(), costo, fechaHora));
-        }
+
+        return boleto;
+    }
+
+    public void recargar(Double monto){
+        if (monto < 272) saldo =  saldo + monto;
+        else if (monto < 500) saldo = saldo + monto + 48;
+        else saldo = saldo + monto + 140;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public List<Viaje> getViajes() {
+        return viajes;
     }
 }
