@@ -10,30 +10,12 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Test strarts here
-     */
     public void testTarjeta()
     {   Tarjeta tarjeta = new Tarjeta();
         tarjeta.recargar(100.0);
-        assertTrue(tarjeta.saldo == 100.0);
+        ColectivoUrbano colectivoUrbano = new ColectivoUrbano("144 Rojo", new BaseBoletos(8.5, 11.5));
+        assertEquals(100.0, tarjeta.saldo);
+        tarjeta.pagar(colectivoUrbano, "2016-06-30T23:10:00");
+        assertEquals(91.5, tarjeta.saldo);
     }
 }
