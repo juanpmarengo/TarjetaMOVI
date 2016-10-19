@@ -28,6 +28,15 @@ public class AppTest
         bicicleta = new Bicicleta("Bicicleta", "EMR");
     }
 
+    public void testApp(){
+        try{
+            App.main(new String[1]);
+        }
+        catch (Exception exception){
+            assertEquals(null, exception);
+        }
+    }
+
     public void testTarjetaRecarga()
     {
         tarjeta.recargar(10.0);
