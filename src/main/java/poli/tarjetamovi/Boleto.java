@@ -13,44 +13,33 @@ public class Boleto {
     private Tarjeta tarjeta;
     private Transporte transporte;
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public Boleto(LocalDateTime fecha, String tipo, Double monto, Tarjeta tarjeta, Transporte transporte) {
+        this.fecha = fecha;
+        this.tipo = tipo;
+        this.monto = monto;
+        this.saldo = tarjeta.getSaldo();
+        this.tarjeta = tarjeta;
+        this.transporte = transporte;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public LocalDateTime getFecha() {
+        return fecha;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public Double getSaldo() {
         return saldo;
-    }
-
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
     }
 
     public Tarjeta getTarjeta() {
         return tarjeta;
     }
 
-    public void setTarjeta(Tarjeta tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-
     public Transporte getTransporte() {
         return transporte;
-    }
-
-    public void setTransporte(Transporte transporte) {
-        this.transporte = transporte;
     }
 
     @Override
@@ -66,9 +55,5 @@ public class Boleto {
 
     public Double getMonto() {
         return monto;
-    }
-
-    public void setMonto(Double monto) {
-        this.monto = monto;
     }
 }

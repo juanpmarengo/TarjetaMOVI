@@ -10,8 +10,12 @@ public class Viaje{
         this.boleto = boleto;
     }
 
+    public Boleto getBoleto(){
+        return boleto;
+    }
+
     public String getTipo(){
-        return boleto.getTipo();
+        return boleto.getTransporte().getClass().getSimpleName();
     }
 
     public Transporte getTransporte(){
@@ -25,9 +29,9 @@ public class Viaje{
     @Override
     public String toString() {
         return "Viaje{" +
-                " tipo= " + boleto.getTipo() +
-                " monto= " + boleto.getMonto() +
-                " transporte= " + boleto.getTransporte().toString() +
+                "tipo='" + boleto.getTransporte().getClass().getSimpleName() + '\'' +
+                ", monto=" + boleto.getMonto() +
+                ", transporte='" + boleto.getTransporte().toString() + '\'' +
                 '}';
     }
 }
