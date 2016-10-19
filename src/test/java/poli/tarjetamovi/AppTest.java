@@ -19,13 +19,13 @@ public class AppTest
     protected void setUp(){
         tarjeta = new Tarjeta();
         colectivo = new Colectivo("144 Negro", "Rosario Bus");
-        bicicleta = new Bicicleta("Bicicleta", "EMR");
+        bicicleta = new Bicicleta("Bicicleta 1", "EMR");
     }
 
     protected void tearDown(){
         tarjeta = new Tarjeta();
         colectivo = new Colectivo("144 Negro", "Rosario Bus");
-        bicicleta = new Bicicleta("Bicicleta", "EMR");
+        bicicleta = new Bicicleta("Bicicleta 1", "EMR");
     }
 
     public void testApp(){
@@ -71,5 +71,15 @@ public class AppTest
         tarjeta.pagar(bicicleta, LocalDateTime.now(), MEDIO);
 
         assertEquals(82.0, tarjeta.getSaldo());
+    }
+
+    public void testColectivo(){
+        assertEquals("144 Negro", colectivo.getNombre());
+        assertEquals("Rosario Bus", colectivo.getEmpresa());
+    }
+
+    public void testBicicleta(){
+        assertEquals("Bicicleta 1", bicicleta.getNombre());
+        assertEquals("EMR", bicicleta.getEmpresa());
     }
 }
