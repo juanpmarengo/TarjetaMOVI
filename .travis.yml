@@ -3,10 +3,10 @@ jdk:
   - oraclejdk8
 before_script:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - npm install coveralls
 script:
   - mvn test
 notifications:
   email: false
 after_success:
   - coveralls
+  
