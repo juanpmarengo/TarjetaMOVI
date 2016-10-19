@@ -48,8 +48,8 @@ public class Boleto {
                 "fecha=" + fecha +
                 ", tipo='" + tipo + '\'' +
                 ", saldo=" + saldo +
-                ", tarjetaId=" + tarjeta.hashCode() +
-                ", nroLinea=" + transporte.hashCode() +
+                ", tarjetaId=" + tarjeta.getTarjetaId() +
+                ", nroLinea=" + transporte.getNumeroLinea() +
                 '}';
     }
 

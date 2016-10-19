@@ -29,7 +29,7 @@ public class Colectivo extends TransporteAbs{
 
         if(tarjeta.getSaldo() > monto){
             tarjeta.descargar(monto);
-            return new Boleto(fecha, NORMAL, monto, tarjeta, this);
+            return new Boleto(fecha, tipo, monto, tarjeta, this);
         }
 
         if(tarjeta.getViajesPlus() > 0){

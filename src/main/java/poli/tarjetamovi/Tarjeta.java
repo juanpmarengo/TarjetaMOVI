@@ -67,6 +67,10 @@ public class Tarjeta implements TarjetaInt{
         return viajes;
     }
 
+    public Long getTarjetaId() {
+        return Long.valueOf(this.hashCode());
+    }
+
     public Double getSaldo() {
         return saldo;
     }
