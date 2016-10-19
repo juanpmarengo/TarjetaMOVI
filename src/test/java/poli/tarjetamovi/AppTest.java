@@ -29,10 +29,11 @@ public class AppTest
     }
 
     /**
-     * Rigourous Test :-)
+     * Test strarts here
      */
-    public void testApp()
-    {
-        assertTrue( true );
+    public void testTarjeta()
+    {   Tarjeta tarjeta = new Tarjeta();
+        tarjeta.recargar(100.0);
+        assertTrue(tarjeta.saldo == 100.0);
     }
 }
