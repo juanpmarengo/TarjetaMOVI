@@ -8,4 +8,4 @@ script:
 notifications:
   email: false
 after_success:
-  - mvn org.eluder.coveralls:coveralls-maven-plugin:report
+  - mvn coveralls:report
