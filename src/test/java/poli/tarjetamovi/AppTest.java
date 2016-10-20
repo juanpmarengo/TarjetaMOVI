@@ -82,4 +82,21 @@ public class AppTest
         assertEquals("Bicicleta 1", bicicleta.getNombre());
         assertEquals("EMR", bicicleta.getEmpresa());
     }
+
+    public void testViajesPlus(){
+        tarjeta.pagar(colectivo, LocalDateTime.now(), NORMAL);
+        assertEquals(0.0, tarjeta.getSaldo());
+        Long expected = 1L;
+        assertEquals(expected, tarjeta.getViajesPlus());
+
+        tarjeta.pagar(bicicleta, LocalDateTime.now(), NORMAL);
+        assertEquals(0.0, tarjeta.getSaldo());
+        expected--;
+        assertEquals(expected, tarjeta.getViajesPlus());
+
+        tarjeta.recargar(20.0);
+        assertEquals(4.0, tarjeta.getSaldo());
+        expected = 2l;
+        assertEquals(expected, tarjeta.getViajesPlus());
+    }
 }

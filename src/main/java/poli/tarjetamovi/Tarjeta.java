@@ -54,11 +54,11 @@ public class Tarjeta implements TarjetaInt{
     private List<Viaje> getLastViajesPlus(long l) {
         List<Viaje> viajes = new LinkedList<>();
 
-        int x = this.viajes.size();
+        int x = this.viajes.size()-1;
 
-        for (; l > 0; x--){
+        for (; l > 0 && x>=0; x--){
             Viaje viaje = this.viajes.get(x);
-            if(viaje.getTipo().equals(PLUS)){
+            if(viaje.getBoleto().getTipo().equals(PLUS)){
                 viajes.add(0, viaje);
                 l--;
             }
