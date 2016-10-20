@@ -29,8 +29,9 @@ public class AppTest
     }
 
     public void testApp(){
+        App app = new App();
         try{
-            App.main(new String[1]);
+            app.main(new String[1]);
         }
         catch (Exception exception){
             assertEquals(null, exception);
@@ -94,9 +95,29 @@ public class AppTest
         expected--;
         assertEquals(expected, tarjeta.getViajesPlus());
 
+        Boleto boleto = tarjeta.pagar(bicicleta, LocalDateTime.now(), NORMAL);
+        assertEquals(null, boleto);
+
+        boleto = tarjeta.pagar(colectivo, LocalDateTime.now(), NORMAL);
+        assertEquals(null, boleto);
+
         tarjeta.recargar(20.0);
         assertEquals(4.0, tarjeta.getSaldo());
-        expected = 2l;
+        expected = 2L;
         assertEquals(expected, tarjeta.getViajesPlus());
+    }
+
+    public void testBoleto(){
+        Boleto boleto = tarjeta.pagar(colectivo, LocalDateTime.MAX, NORMAL);
+        assertEquals(LocalDateTime.MAX, boleto.getFecha());
+        assertEquals(tarjeta.getSaldo(), boleto.getSaldo());
+        assertEquals(tarjeta, boleto.getTarjeta());
+    }
+
+    public void testViaje(){
+        tarjeta.pagar(colectivo, LocalDateTime.MAX, NORMAL);
+        Viaje viaje = tarjeta.getViajes().get(0);
+        assertEquals(colectivo, viaje.getTransporte());
+        assertEquals("Colectivo", viaje.getTipo());
     }
 }
