@@ -161,4 +161,13 @@ public class AppTest
 
         assertEquals(NORMAL, boleto.getTipo());
     }
+
+    public void testTrasbordoViajePlus(){
+        tarjeta.recargar(5.0);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-09T14:10:00"), NORMAL);
+        Boleto boleto = tarjeta.pagar(colectivo2, LocalDateTime.parse("2016-07-09T15:30:00"), NORMAL);
+
+        assertEquals(PLUS, boleto.getTipo());
+        assertEquals(4.0, boleto.getMonto());
+    }
 }
