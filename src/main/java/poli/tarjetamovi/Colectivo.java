@@ -24,7 +24,7 @@ public class Colectivo extends TransporteAbs{
         Double monto = BOLETO_VALOR;
 
         if (tipo.equals(MEDIO))
-            monto = monto * 0.5;
+            monto = round(monto * 0.5, 2);
 
         if(trasbordo)
             monto = monto * TRASBORDO_RATIO;
@@ -35,7 +35,7 @@ public class Colectivo extends TransporteAbs{
         }
 
         if(trasbordo)
-            monto = monto / TRASBORDO_RATIO;
+            monto = Double.valueOf(Math.round(monto / TRASBORDO_RATIO));
 
         if(tarjeta.getViajesPlus() > 0){
             tarjeta.descargarViajePlus();
@@ -54,7 +54,7 @@ public class Colectivo extends TransporteAbs{
 
         Boleto lastBoleto = viajes.get(viajes.size() - 1).getBoleto();
 
-        if (lastBoleto.getTipo().equals(TRASBORDO))
+        if (lastBoleto.getTipo().equals(TRASBORDO) || lastBoleto.getTransporte().getClass().getSimpleName().equals("Bicicleta"))
             return false;
 
         if (lastBoleto.getTransporte().getNombre().equals(this.getNombre()))

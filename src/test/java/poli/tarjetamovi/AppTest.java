@@ -14,11 +14,13 @@ public class AppTest
 {
     private Tarjeta tarjeta;
     private Colectivo colectivo;
+    private Colectivo colectivo2;
     private Bicicleta bicicleta;
 
     protected void setUp(){
         tarjeta = new Tarjeta();
         colectivo = new Colectivo("144 Negro", "Rosario Bus");
+        colectivo2 = new Colectivo("35/9 Verde", "Rosario Bus");
         bicicleta = new Bicicleta("Bicicleta 1", "EMR");
     }
 
@@ -125,5 +127,38 @@ public class AppTest
         Viaje viaje = tarjeta.getViajes().get(0);
         assertEquals(colectivo, viaje.getTransporte());
         assertEquals("Colectivo", viaje.getTipo());
+    }
+
+    public void testTrasbordo60(){
+        tarjeta.recargar(500.0);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-05T08:10:00"), NORMAL);
+        Boleto boleto = tarjeta.pagar(colectivo2, LocalDateTime.parse("2016-07-05T08:50:00"), NORMAL);
+
+        assertEquals(TRASBORDO, boleto.getTipo());
+    }
+
+    public void testTrasbordo90(){
+        tarjeta.recargar(500.0);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-09T14:10:00"), NORMAL);
+        Boleto boleto = tarjeta.pagar(colectivo2, LocalDateTime.parse("2016-07-09T15:30:00"), NORMAL);
+
+        assertEquals(TRASBORDO, boleto.getTipo());
+    }
+
+    public void testTrasbordoTrasbordo(){
+        tarjeta.recargar(500.0);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-09T14:10:00"), NORMAL);
+        tarjeta.pagar(colectivo2, LocalDateTime.parse("2016-07-09T15:30:00"), NORMAL);
+        Boleto boleto = tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-09T15:50:00"), NORMAL);
+
+        assertEquals(NORMAL, boleto.getTipo());
+    }
+
+    public void testTrasbordoMismoColectivo(){
+        tarjeta.recargar(500.0);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-09T14:10:00"), NORMAL);
+        Boleto boleto = tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-09T15:30:00"), NORMAL);
+
+        assertEquals(NORMAL, boleto.getTipo());
     }
 }
