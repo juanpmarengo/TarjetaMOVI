@@ -36,6 +36,7 @@ public class AppTest
         catch (Exception exception){
             assertEquals(null, exception);
         }
+        Constants constants = new Constants();
     }
 
     public void testTarjetaRecarga()
@@ -57,19 +58,19 @@ public class AppTest
     {
         tarjeta.recargar(100.0);
 
-        tarjeta.pagar(colectivo, LocalDateTime.now(), NORMAL);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-02T08:10:00"), NORMAL);
 
         assertEquals(96.0, tarjeta.getSaldo());
 
-        tarjeta.pagar(colectivo, LocalDateTime.now(), MEDIO);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-03T08:10:00"), MEDIO);
 
         assertEquals(94.0, tarjeta.getSaldo());
 
-        tarjeta.pagar(colectivo, LocalDateTime.now(), GRATIS);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-04T08:10:00"), GRATIS);
 
         assertEquals(94.0, tarjeta.getSaldo());
 
-        tarjeta.pagar(bicicleta, LocalDateTime.now(), MEDIO);
+        tarjeta.pagar(bicicleta, LocalDateTime.parse("2016-07-05T08:10:00"), MEDIO);
 
         assertEquals(82.0, tarjeta.getSaldo());
     }
@@ -85,24 +86,29 @@ public class AppTest
     }
 
     public void testViajesPlus(){
-        tarjeta.pagar(colectivo, LocalDateTime.now(), NORMAL);
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-02T08:10:00"), NORMAL);
         assertEquals(0.0, tarjeta.getSaldo());
         Long expected = 1L;
         assertEquals(expected, tarjeta.getViajesPlus());
 
-        tarjeta.pagar(bicicleta, LocalDateTime.now(), NORMAL);
+        tarjeta.pagar(bicicleta, LocalDateTime.parse("2016-07-03T08:10:00"), NORMAL);
         assertEquals(0.0, tarjeta.getSaldo());
         expected--;
         assertEquals(expected, tarjeta.getViajesPlus());
 
-        Boleto boleto = tarjeta.pagar(bicicleta, LocalDateTime.now(), NORMAL);
+        Boleto boleto = tarjeta.pagar(bicicleta, LocalDateTime.parse("2016-07-04T08:10:00"), NORMAL);
         assertEquals(null, boleto);
 
-        boleto = tarjeta.pagar(colectivo, LocalDateTime.now(), NORMAL);
+        boleto = tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-05T08:10:00"), NORMAL);
         assertEquals(null, boleto);
 
         tarjeta.recargar(20.0);
-        assertEquals(4.0, tarjeta.getSaldo());
+        assertEquals(20.0, tarjeta.getSaldo());
+
+        tarjeta.pagar(colectivo, LocalDateTime.parse("2016-07-06T08:10:00"), MEDIO);
+
+        assertEquals(2.0, tarjeta.getSaldo());
+
         expected = 2L;
         assertEquals(expected, tarjeta.getViajesPlus());
     }

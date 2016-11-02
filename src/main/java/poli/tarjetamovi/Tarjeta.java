@@ -21,6 +21,20 @@ public class Tarjeta implements TarjetaInt{
     }
 
     public Boleto pagar(Transporte transporte, LocalDateTime fecha, String tipo) {
+
+        if (viajesPlus < 2){
+            List<Viaje> viajes = getLastViajesPlus(2 - viajesPlus);
+
+            for (Viaje viaje : viajes){
+                if (viaje.getMonto() <= saldo){
+                    saldo -= viaje.getMonto();
+                    viajesPlus++;
+                }
+                else
+                    break;
+            }
+        }
+
         Boleto boleto = transporte.cobrar(this, fecha, tipo);
 
         if (boleto != null){
@@ -38,17 +52,6 @@ public class Tarjeta implements TarjetaInt{
             saldo = saldo + monto + 48;
         else
             saldo = saldo + monto + 140;
-
-        List<Viaje> viajes = getLastViajesPlus(2 - viajesPlus);
-
-        for (Viaje viaje : viajes){
-            if (viaje.getMonto() <= saldo){
-                saldo -= viaje.getMonto();
-                viajesPlus++;
-            }
-            else
-                break;
-        }
     }
 
     private List<Viaje> getLastViajesPlus(long l) {
