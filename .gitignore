@@ -1,22 +1,4 @@
 ######################
-# Project Specific
-######################
-/src/main/webapp/content/css/main.css
-/target/www/**
-
-######################
-# Node
-######################
-/node/**
-/node_tmp/**
-/node_modules/**
-
-######################
-# SASS
-######################
-.sass-cache/**
-
-######################
 # Eclipse
 ######################
 *.pydevproject
