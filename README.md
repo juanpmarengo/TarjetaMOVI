@@ -1,6 +1,6 @@
 # TarjetaMovi
 [![Build Status](https://travis-ci.org/juanpmarengo/tarjetamovi.svg?branch=master)](https://travis-ci.org/juanpmarengo/tarjetamovi)
-[![Coverage Status](https://coveralls.io/repos/github/juanpmarengo/tarjetamovi/badge.svg)](https://coveralls.io/github/juanpmarengo/tarjetamovi)
+[![Coverage Status](https://coveralls.io/repos/github/juanpmarengo/tarjetamovi/badge.svg?branch=master)](https://coveralls.io/github/juanpmarengo/tarjetamovi?branch=master)
 
 - Using Java 1.8
 
